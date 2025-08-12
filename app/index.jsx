@@ -1,4 +1,5 @@
 import { Image, ImageBackground, StyleSheet, Text, View } from "react-native";
+import { Botao } from "../components/botao/Botao.jsx";
 import { Input } from "../components/input/Input.jsx";
 
 export default function Index() {
@@ -7,7 +8,6 @@ export default function Index() {
     {/* 1. Logo + Img de fundo */}
     <ImageBackground source={require('../assets/images/imgFundoLogoFindCEP.png')} style={styles.imgFundo}>
       <Image source={require('../assets/images/LogoFindCEP.png')} style={styles.logo}></Image>
-
     </ImageBackground>
     {/* 2. Campo de consulta */}
     <View style={styles.container}>
@@ -16,6 +16,7 @@ export default function Index() {
     {/* 2.2. Input */}
     <Input/>
     {/* 2.3. Botão */}
+    <Botao tituloBotao='Consultar'/>
     {/* 2.4. Botão */}
     {/* 2.5. Card de informações */}
     </View>

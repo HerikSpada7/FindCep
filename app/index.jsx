@@ -1,9 +1,32 @@
+import axios from "axios";
+import { useState } from "react";
 import { Image, ImageBackground, ScrollView, StyleSheet, Text, View } from "react-native";
 import { Botao } from "../components/botao/Botao.jsx";
 import { Card } from "../components/card/Card.jsx";
 import { Input } from "../components/input/Input.jsx";
 
 export default function Index() {
+  const [cep, setCep] = useState("");
+  const [jsonCep, setJsonCep] = useState({});
+  const [amostradinho, setAmostradinho] = useState (false)
+
+  async function consultarCep(e) {
+    e.preventDefault();
+    try {
+
+      if (cep !== "" && cep.length === 8) {
+
+        const resposta = await axios.get(`https://viacep.com.br/ws/${cep}/json/`)
+        setJsonCep(resposta.data);
+        setAmostradinho(true)
+      } else {
+        alert("O cep está incorreto. Digite com 8 números.")
+      }
+
+    } catch (error) {
+      console.log(error);
+    }
+  }
   return (
     <>
     {/* 1. Logo + Img de fundo */}
@@ -19,19 +42,33 @@ export default function Index() {
       <Text style={styles.titulo}>Consulte seu CEP</Text>
 
       {/* 2.2. Input */}
-      <Input/>
+          {/* Input. */}
+          <Input
+            valorCep={cep}
+            onChangeValorCep={e => setCep(e)}></Input>
 
-      {/* 2.3. Botão */}
-      <Botao tituloBotao='Consultar'/>
+          {/* Botão. */}
 
-      {/* 2.4. Card de informações */}
-      <Card/>
+          <Botao tituloBotao='Consultar' onPress={consultarCep} />
 
-      {/* Fim de tela */}
+          {/* Card de Informações. */}
+          {amostradinho &&
+            <Card
+              cep={jsonCep.cep}
+              logradouro={jsonCep.logradouro}
+              bairro={jsonCep.bairro}
+              estado={jsonCep.estado}
+              ufzin={jsonCep.uf}
+              regiao={jsonCep.regiao}
+           />
+          
+          };
 
-      </View>
-    </ScrollView>
+          
+        </View>
+      </ScrollView>
     </>
+
   );
 }
 
@@ -61,6 +98,8 @@ const styles = StyleSheet.create({
     paddingBottom: 30
   },
   titulo: {
-    fontSize: 25
+    fontSize: 25,
+    fontFamily: "Poppins-Bold",
+    color: "#000000"
   }
 })

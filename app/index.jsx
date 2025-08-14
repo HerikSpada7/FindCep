@@ -1,5 +1,6 @@
-import { Image, ImageBackground, StyleSheet, Text, View } from "react-native";
+import { Image, ImageBackground, ScrollView, StyleSheet, Text, View } from "react-native";
 import { Botao } from "../components/botao/Botao.jsx";
+import { Card } from "../components/card/Card.jsx";
 import { Input } from "../components/input/Input.jsx";
 
 export default function Index() {
@@ -9,17 +10,27 @@ export default function Index() {
     <ImageBackground source={require('../assets/images/imgFundoLogoFindCEP.png')} style={styles.imgFundo}>
       <Image source={require('../assets/images/LogoFindCEP.png')} style={styles.logo}></Image>
     </ImageBackground>
+
     {/* 2. Campo de consulta */}
-    <View style={styles.container}>
-    {/* 2.1. Título */}
-    <Text style={styles.titulo}>Consulte seu CEP</Text>
-    {/* 2.2. Input */}
-    <Input/>
-    {/* 2.3. Botão */}
-    <Botao tituloBotao='Consultar'/>
-    {/* 2.4. Botão */}
-    {/* 2.5. Card de informações */}
-    </View>
+    <ScrollView style={styles.containerScroll}>
+      <View style={styles.container}>
+
+      {/* 2.1. Título */}
+      <Text style={styles.titulo}>Consulte seu CEP</Text>
+
+      {/* 2.2. Input */}
+      <Input/>
+
+      {/* 2.3. Botão */}
+      <Botao tituloBotao='Consultar'/>
+
+      {/* 2.4. Card de informações */}
+      <Card/>
+
+      {/* Fim de tela */}
+
+      </View>
+    </ScrollView>
     </>
   );
 }
@@ -37,14 +48,19 @@ const styles = StyleSheet.create({
     height: 120
   },
   container:{
-    flex: 1.5,
+    gap: 40,
+    width: '100%',
+    minHeight: '100%',
     alignItems: 'center',
+    paddingBottom: 80,
+  },
+  containerScroll:{
+    flex: 1.5,
     paddingTop: 50,
-    paddingBottom: 50,
-    gap: 40
+    height: '100%',
+    paddingBottom: 30
   },
   titulo: {
     fontSize: 25
   }
-
 })

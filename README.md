@@ -1,4 +1,4 @@
-<!-- React Native do pai de banho ! -->
+<!-- React Native do spada ! -->
 
 # Welcome to your Expo app 👋
 
